@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<h2>CREATE A NEW ITEM</h2> 
+	<form action="#" method="post">
+		</br>
+		<label for="name">Name:</label>
+		<input type="text" maxlength="32" name="name" placeholder="Name of the item (needed)">
+		</br></br>
+		<label for="category">Category:</label>
+		<select name="category">
+			{% for category in categories %}
+  				<option value="{{category.name}}">{{category.name}}</option>
+			{% endfor %}
+		</select>
+		</br></br>
+		<label for="description">Description:</label>
+		<input type="text" maxlength="250" name="description" placeholder="Description">
+		</br></br>
+		<button type="submit">Create</button>
+	</form>
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				{{message}}
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+{% endblock %}

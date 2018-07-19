@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+	<section class="categories">
+		<h2>CATEGORIES</h2> 
+		<div class="rows-container">
+			{% for category in categories %}
+				<a href="{{url_for('show_category_items', category_name=category.name)}}">
+					<div class="row">
+						<h3>{{category.name}}</h3>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</section>
+	<section class="latest-items">
+		<h2>LATEST ITEMS</h2>
+		{% if 'username' in session %}
+			<a class="crud-link" href="{{url_for('new_item')}}">Add New Item</a>
+		{% endif %}
+		<div class="rows-container">
+			{% for item in latest_items %}
+				<a href="{{url_for('show_item_infos', category_name=item.category_name, item_name=item.name)}}">
+					<div class="row">
+						<h3>{{item.name}} ({{item.category_name}})</h3>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</section>
+
+{% endblock %}
